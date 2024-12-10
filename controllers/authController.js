@@ -2,7 +2,7 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT;
-exports.signup = async (req, res) => {
+const signup = async (req, res) => {
   const { name, email, password } = req.body;
 
 
@@ -24,7 +24,7 @@ exports.signup = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -45,3 +45,4 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+module.exports = { signup, login };
