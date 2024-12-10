@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 const connectDB = async () => {
+  console.log(process.env.dateBaseUrl,"process.env.dateBaseUrl","checking data base url");
+  
   try {
     await mongoose.connect(`${process.env.dateBaseUrl}filterdataset`, {
       useNewUrlParser: true,
