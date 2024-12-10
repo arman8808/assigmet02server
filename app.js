@@ -26,16 +26,25 @@ const datasetRoutes = require('./routes/datasetRoutes');
 const cors = require('cors');
 
 const app = express();
+
+// Middleware
 app.use(express.json());
 app.use(cors());
 
+// Debugging Middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/dataset', datasetRoutes);
 
-
-app.get('/', async (req, res) => {
-  return res.status(200).json({ message: 'Server is live' });
+// Default route for health check
+app.get('/', (req, res) => {
+  res.status(200).json({ message: 'Server is live' });
 });
 
-module.exports = app;  
+module.exports = app;
+
