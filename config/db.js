@@ -19,10 +19,8 @@
 
 // module.exports = connectDB;
 
-
-
 const mongoose = require("mongoose");
-require('dotenv').config();
+require("dotenv").config();
 // Ensure that the environment variable for MongoDB URI is set correctly
 console.log("DB: ->", process.env.dateBaseUrl);
 
@@ -31,8 +29,10 @@ mongoose.set("strictQuery", true);
 const connectDB = async () => {
   try {
     await mongoose.connect(`${process.env.dateBaseUrl}filterdataset`, {
-      useNewUrlParser: true, // Optional in newer versions of mongoose
-      useUnifiedTopology: true, // Optional in newer versions of mongoose
+      serverSelectionTimeoutMS: 5000, // Shorten the time to try connecting
+      socketTimeoutMS: 45000, // Close sockets after 45 seconds
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
     console.log("mongoose is connected");
 
