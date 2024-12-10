@@ -4,6 +4,6 @@ const { authenticate } = require('../middlewares/authMiddleware');
 const  upload  = require('../middlewares/multerMiddleware');
 const router = express.Router();
 
-router.get('/',upload.none() , getDataset);
+router.get('/',upload.none() ,authenticate, getDataset);
 
 module.exports = router;
